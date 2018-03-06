@@ -41,6 +41,18 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
+  deleteTodo(index) {
+    //console.log(index, this.state.todos[index]);
+    // eslint-disable-next-line
+    const toDelete = this.state.todos[index];
+    //console.log("toDelete", toDelete);
+    const toKeep = this.state.todos.filter(
+      toDelete => this.state.todos[index] !== toDelete
+    );
+    //console.log("keep these", toKeep);
+    this.setState({ todos: toKeep });
+  }
+
   render() {
     return (
       <div className="App">
@@ -51,6 +63,7 @@ class App extends Component {
               description={todo.description}
               isCompleted={todo.isCompleted}
               toggleComplete={() => this.toggleComplete(index)}
+              deleteTodo={() => this.deleteTodo(index)}
             />
           ))}
         </ul>
